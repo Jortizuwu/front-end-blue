@@ -1,7 +1,7 @@
 // src/routes/routes.tsx
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PrivateRoute from "./components/route.private";
+// import PrivateRoute from "./components/route.private";
 
 const Layout = lazy(() => import("../layout"));
 const Home = lazy(() => import("../../pages/home"));
@@ -13,8 +13,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        element: <PrivateRoute />,
-        children: [{ index: true, element: <Home /> }],
+        // element: <PrivateRoute />,
+        children: [
+          { index: true, element: <Home /> },
+        ],
       },
     ],
   },
