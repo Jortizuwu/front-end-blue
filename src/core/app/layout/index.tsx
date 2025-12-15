@@ -1,7 +1,7 @@
 
 function RootLayout() {
   return (
-    <div> RootLayout</div>
+    <div className="text-red-300"> RootLayout</div>
   )
 }
 
