@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./core/app";
 import QueryProvider from "./shared/components/providers/react-query";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/shared/components/ui/sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
