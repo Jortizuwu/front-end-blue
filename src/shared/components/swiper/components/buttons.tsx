@@ -17,7 +17,7 @@ type Props = {
   onClick: () => void;
 };
 
-const GameActionBtn = ({ direction, onClick }: Props) => {
+const SwipeButton = ({ direction, onClick }: Props) => {
   const Icon: React.ElementType = actionPropsMatrix[direction!].icon;
 
   return (
@@ -34,4 +34,4 @@ const GameActionBtn = ({ direction, onClick }: Props) => {
   );
 };
 
-export default GameActionBtn;
+export default SwipeButton;

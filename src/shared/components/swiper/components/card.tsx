@@ -1,10 +1,7 @@
+// src/shared/components/swiper/components/card.tsx
 import React from "react";
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  type PanInfo,
-} from "framer-motion";
+import { motion } from "framer-motion";
+import { useSwipeCard } from "./utils/use-swipe-card";
 
 interface SwipeCardProps {
   id?: number;
@@ -20,26 +17,13 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
   affirmation,
   onSwipe,
 }) => {
-  const x = useMotionValue(0);
-
-  const rotate = useTransform(x, [-200, 200], [-20, 20]);
-  const opacity = useTransform(x, [-200, -150, 0, 150, 200], [0, 1, 1, 1, 0]);
-
-  const handleDragEnd = (
-    _: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
-  ) => {
-    const offsetBoundary = 150;
-    const direction = info.offset.x > 0 ? "right" : "left";
-
-    if (Math.abs(info.offset.x) > offsetBoundary) {
-      onSwipe?.(direction);
-    }
-  };
+  const { x, rotate, opacity, handleDragEnd } = useSwipeCard({
+    onSwipe,
+  });
 
   return (
     <motion.div
-      className="absolute top-2 w-100 aspect-100/150 rounded-lg shadow-lg p-4 bg-white flex flex-col items-center justify-between"
+      className="absolute top-2 w-100 aspect-100/150 rounded-lg shadow-lg p-4 flex flex-col items-center justify-between"
       style={{
         x,
         rotate,
@@ -53,9 +37,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.2}
-      onDragEnd={(event, info) => {
-        handleDragEnd(event, info);
-      }}
+      onDragEnd={handleDragEnd}
     >
       {affirmation && (
         <p className="mt-auto text-center text-lg font-semibold text-black">

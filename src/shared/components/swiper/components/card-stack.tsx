@@ -1,8 +1,10 @@
 // src/components/CardStack.tsx
-import React, { useState } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SwipeCard } from "./card";
 import GameActionBtn from "./buttons";
+import { useCardStack } from "./utils/use-card-stack";
+import { cardVariants } from "./utils/card-variants";
 
 interface CardData {
   id: number;
@@ -18,30 +20,13 @@ interface CardStackProps {
 export const CardStack: React.FC<CardStackProps> = ({
   cards: initialCards,
 }) => {
-  const [cards, setCards] = useState(initialCards);
-
-  const cardVariants = {
-    current: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3 } },
-    upcoming: {
-      opacity: 0.5,
-      y: 20,
-      scale: 0.9,
-      transition: { duration: 0.3 },
-    },
-    remainings: { opacity: 0, y: 10, scale: 0.9 },
-  };
-
-  const handleSwipe = (dir: "left" | "right") => {
-    console.log(dir);
-    setCards((prev) => prev.slice(0, -1));
-  };
+  const { cards, handleSwipe, getCardPosition } = useCardStack(initialCards);
 
   return (
     <div className="relative flex justify-center items-center w-full h-full">
       <AnimatePresence initial={false}>
         {cards.map((card, i) => {
-          const isLast = i === cards.length - 1;
-          const isUpcoming = i === cards.length - 2;
+          const { isLast, isUpcoming } = getCardPosition(i);
           return (
             <motion.div
               key={card.id}
