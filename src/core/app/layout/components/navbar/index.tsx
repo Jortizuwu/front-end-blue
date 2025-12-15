@@ -1,5 +1,6 @@
+import { DialogLogin } from "@/shared/components/auth";
 import { Button } from "@/shared/components/ui/button";
-import { UserIcon, HeartIcon, CompassIcon } from "lucide-react";
+import { HeartIcon, CompassIcon, BookCopy } from "lucide-react";
 
 type MenuItem = {
   id: string;
@@ -10,14 +11,14 @@ type MenuItem = {
 
 const MENU_ITEMS: MenuItem[] = [
   {
-    id: "user",
-    label: "Usuario",
-    icon: UserIcon,
-  },
-  {
     id: "likes",
     label: "Likes",
     icon: HeartIcon,
+  },
+  {
+    id: "characters",
+    label: "Personajes",
+    icon: BookCopy,
   },
   {
     id: "explore",
@@ -35,15 +36,16 @@ function NavbarComponent() {
           <Button
             key={id}
             variant="ghost"
-            size="icon-lg"
+            size="lg"
             aria-label={label}
             onClick={onClick}
             className="flex flex-col gap-1 pointer items-center justify-center p-2"
           >
             <Icon className="h-5 w-5" />
-            <p>{label}</p>
+            {label}
           </Button>
         ))}
+        <DialogLogin mode="login" />
       </div>
       <div className="flex-1" />
     </nav>

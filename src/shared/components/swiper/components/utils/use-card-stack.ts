@@ -1,4 +1,3 @@
-// src/shared/components/swiper/hooks/use-card-stack.ts
 import { useState } from "react";
 
 export type SwipeDirection = "left" | "right";
