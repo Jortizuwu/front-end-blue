@@ -1,3 +1,4 @@
+import { useCharacterStack } from "@/shared/hooks/uses-character-stack";
 import { motion } from "framer-motion";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 
@@ -14,11 +15,23 @@ const actionPropsMatrix = {
 
 type Props = {
   direction: "left" | "right";
-  onClick: () => void;
 };
 
-const SwipeButton = ({ direction, onClick }: Props) => {
+const SwipeButton = ({ direction }: Props) => {
+  const { removeTopCard } = useCharacterStack();
   const Icon: React.ElementType = actionPropsMatrix[direction!].icon;
+
+  const onClick = () => {
+    if (direction === "left") {
+      removeTopCard("left");
+      return;
+    }
+
+    if (direction === "right") {
+      removeTopCard("right");
+      return;
+    }
+  };
 
   return (
     <motion.button onClick={onClick} whileTap={{ scale: 0.9 }}>

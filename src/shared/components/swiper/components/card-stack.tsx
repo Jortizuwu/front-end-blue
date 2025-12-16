@@ -6,7 +6,7 @@ import { cardVariants } from "./utils/card-variants";
 import { useCharacterStack } from "@/shared/hooks/uses-character-stack";
 
 export const CardStack = () => {
-  const { removeTopCard, isLoading } = useCharacterStack();
+  const { isLoading } = useCharacterStack();
 
   const { handleSwipe, getCardPosition, cards } = useCardStack();
 
@@ -29,7 +29,7 @@ export const CardStack = () => {
           const { isLast, isUpcoming } = getCardPosition(i);
           return (
             <motion.div
-              key={card.id}
+              key={card.customId}
               className="absolute top-0 w-full h-full flex justify-center items-center"
               variants={cardVariants}
               initial="remainings"
@@ -50,8 +50,8 @@ export const CardStack = () => {
         })}
       </AnimatePresence>
       <div className="absolute top-60 h-screen mt-4 flex justify-between w-40">
-        <GameActionBtn direction="left" onClick={removeTopCard} />
-        <GameActionBtn direction="right" onClick={removeTopCard} />
+        <GameActionBtn direction="left" />
+        <GameActionBtn direction="right" />
       </div>
     </div>
   );

@@ -7,6 +7,15 @@ export interface Character {
   id: string;
   name: string;
   image: string;
-  origin: string;
+  origin: TargetType;
   extra: Record<string, string | number>;
 }
+
+export interface CreateCharacterRequest {
+  idExternalApi: string;
+  type: TargetType;
+  reactionType: ReactionType;
+}
+
+export type ReactionType = "LIKE" | "UNLIKE";
+export type TargetType = "POKEMON" | "RICK_AND_MORTY" | "SUPER_HERO";

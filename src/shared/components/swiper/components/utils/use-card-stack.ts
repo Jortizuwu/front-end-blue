@@ -6,8 +6,15 @@ export const useCardStack = () => {
   const { cards, removeTopCard } = useCharacterStack();
 
   const handleSwipe = (direction: SwipeDirection) => {
-    console.log({ direction });
-    removeTopCard();
+    if (direction === "left") {
+      removeTopCard("left");
+      return;
+    }
+
+    if (direction === "right") {
+      removeTopCard("right");
+      return;
+    }
   };
 
   const getCardPosition = (index: number) => {
