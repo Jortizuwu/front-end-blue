@@ -20,10 +20,10 @@ export function useAuthForm(mode: "login" | "register") {
       const { username, password } = data;
 
       const {
-        data: { token },
+        data: { accessToken },
       } = await authServices.login(username, password);
 
-      setToken(token);
+      setToken(accessToken);
 
       toast.success("Iniciando sesión", {
         style: { background: "#6FCF97", color: "#fff" },

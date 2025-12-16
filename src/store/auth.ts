@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export interface AuthSlice {
   token: string | null;
@@ -16,6 +16,7 @@ export const useAuthStore = create<AuthSlice>()(
     }),
     {
       name: "auth-storage",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
