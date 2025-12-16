@@ -8,8 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { UserIcon } from "lucide-react";
+
 import { useState } from "react";
+import { LogIn } from "lucide-react";
 
 export function DialogLogin() {
   const [open, setOpen] = useState(false);
@@ -33,7 +34,7 @@ export function DialogLogin() {
           size="lg"
           className="flex flex-col gap-1 pointer items-center justify-center p-2"
         >
-          <UserIcon className="h-5 w-5" />
+          <LogIn className="h-5 w-5" />
           {title}
         </Button>
       </DialogTrigger>

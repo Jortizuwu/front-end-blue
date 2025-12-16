@@ -1,6 +1,7 @@
 import { DialogLogin } from "@/shared/components/auth";
 import { Button } from "@/shared/components/ui/button";
-import { HeartIcon, CompassIcon, BookCopy } from "lucide-react";
+import { useAuthStore } from "@/store/auth";
+import { HeartIcon, CompassIcon, BookCopy, LogOut } from "lucide-react";
 
 type MenuItem = {
   id: string;
@@ -28,6 +29,13 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 function NavbarComponent() {
+  const { token, removeToken } = useAuthStore();
+
+  const handleLogout = () => {
+    removeToken();
+    window.location.reload();
+  };
+
   return (
     <nav className="border-b mx-auto flex justify-between items-center px-8 h-20">
       <div className="flex-1" />
@@ -45,7 +53,20 @@ function NavbarComponent() {
             {label}
           </Button>
         ))}
-        <DialogLogin mode="login" />
+        {token ? (
+          <Button
+            variant="ghost"
+            size="lg"
+            aria-label="Cerrar sesión"
+            className="flex flex-col gap-1 pointer items-center justify-center p-2"
+            onClick={handleLogout}
+          >
+            <LogOut className="h-5 w-5" />
+            Cerrar sesión
+          </Button>
+        ) : (
+          <DialogLogin />
+        )}
       </div>
       <div className="flex-1" />
     </nav>
