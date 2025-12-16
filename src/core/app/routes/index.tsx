@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const Layout = lazy(() => import("../layout"));
 const Characters = lazy(() => import("../../pages/characters"));
 const Reactions = lazy(() => import("../../pages/reactions"));
+const Explore = lazy(() => import("../../pages/explore"));
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Characters /> },
           { path: "reactions", element: <Reactions /> },
+          { path: "explore", element: <Explore /> },
         ],
       },
     ],
