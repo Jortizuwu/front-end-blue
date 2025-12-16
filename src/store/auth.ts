@@ -1,11 +1,9 @@
-// src/store/auth.store.ts
-import type { LoginResponse } from "@/shared/interfaces/login.model";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export interface AuthSlice {
   token: string | null;
-  setToken: (payload: LoginResponse) => void;
+  setToken: (token: string) => void;
   removeToken: () => void;
 }
 
@@ -13,7 +11,7 @@ export const useAuthStore = create<AuthSlice>()(
   persist(
     (set) => ({
       token: null,
-      setToken: ({ status }) => set({ token: status }),
+      setToken: (token: string) => set({ token }),
       removeToken: () => set({ token: null }),
     }),
     {

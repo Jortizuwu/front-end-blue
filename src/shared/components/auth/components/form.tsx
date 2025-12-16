@@ -1,97 +1,82 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
-import { Field, FieldGroup, FieldLabel } from "@/shared/components/ui/field";
-import { Input } from "@/shared//components/ui/input";
-import { Spinner } from "@/shared//components/ui/spinner";
-import { FormSchema, useAuthForm, type FormType } from "./utils/useAuthForm";
+import { Input } from "@/shared/components/ui/input";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/shared/components/ui/form";
 
-export interface AuthFormProps {
+import { useAuthForm } from "./utils/useAuthForm";
+import { AUTH_FIELDS } from "./utils/auth-form.config";
+import { useEffect } from "react";
+import {
+  LoginSchema,
+  RegisterSchema,
+  type AuthFormType,
+} from "./utils/schemas";
+
+interface AuthFormProps {
   mode?: "login" | "register";
+  onSuccess?: () => void;
 }
-export function AuthForm({ mode = "login" }: AuthFormProps) {
-  const { isLoading, submit, formValues } = useAuthForm(mode);
 
-  const form = useForm<FormType>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: formValues.defaultValues,
-  });
+export function AuthForm({ mode = "login", onSuccess }: AuthFormProps) {
+  const { isLoading, submit, formValues, isSuccess } = useAuthForm(mode);
 
-  const onSubmit = (data: FormType) => {
+  const handleSubmit = (data: AuthFormType) => {
     submit(data);
   };
 
-  if (isLoading)
-    return (
-      <div className="h-screen w-full flex items-center justify-center">
-        <span>Loading ...</span>
-      </div>
-    );
+  useEffect(() => {
+    if (isSuccess) {
+      onSuccess?.();
+    }
+  }, [isSuccess, onSuccess]);
+
+  const form = useForm<AuthFormType>({
+    resolver: zodResolver(mode === "login" ? LoginSchema : RegisterSchema),
+    defaultValues: formValues.defaultValues,
+  });
+
+  const fields = AUTH_FIELDS[mode];
 
   return (
-    <div className={cn("grid gap-6")}>
-      <form {...form} onSubmit={form.handleSubmit(onSubmit)}>
-        <FieldGroup>
-          <Field>
-            <FieldLabel className="sr-only" htmlFor="username">
-              Nombre de usuario
-            </FieldLabel>
-            <Input
-              id="username"
-              placeholder="Ingresa tu nombre de usuario"
-              type="username"
-              autoCapitalize="none"
-              autoComplete="username"
-              autoCorrect="off"
-              disabled={isLoading}
-              value={formValues.defaultValues.username}
-            />
-          </Field>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+        {fields.map((field) => (
+          <FormField
+            key={field.name}
+            control={form.control}
+            name={field.name as keyof AuthFormType}
+            render={({ field: rhfField }) => (
+              <FormItem>
+                <FormLabel>{field.label}</FormLabel>
+                <FormControl>
+                  <Input
+                    autoComplete="off"
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    disabled={isLoading}
+                    {...rhfField}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
 
-          <Field>
-            <FieldLabel className="sr-only" htmlFor="password">
-              Contraseña
-            </FieldLabel>
-            <Input
-              id="password"
-              placeholder="******"
-              type="password"
-              autoCapitalize="none"
-              autoComplete="off"
-              autoCorrect="off"
-              disabled={isLoading}
-              value={formValues.defaultValues.password}
-            />
-          </Field>
-
-          {mode === "register" && (
-            <Field>
-              <FieldLabel className="sr-only" htmlFor="confirmPassword">
-                Confirmar contraseña
-              </FieldLabel>
-              <Input
-                id="confirmPassword"
-                placeholder="Confirma tu contraseña"
-                type="password"
-                autoCapitalize="none"
-                autoComplete="off"
-                autoCorrect="off"
-                disabled={isLoading}
-                value={formValues.defaultValues.password}
-              />
-            </Field>
-          )}
-
-          <Field>
-            <Button disabled={isLoading}>
-              {isLoading && <Spinner />}
-              {mode === "login" ? "Iniciar sesión" : "Crear cuenta"}
-            </Button>
-          </Field>
-        </FieldGroup>
+        <Button type="submit" disabled={isLoading} className="w-full">
+          {mode === "login" ? "Iniciar sesión" : "Crear cuenta"}
+          {isLoading && <span>...</span>}
+        </Button>
       </form>
-    </div>
+    </Form>
   );
 }

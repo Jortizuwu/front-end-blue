@@ -3,12 +3,20 @@ import type { LoginResponse } from "../interfaces/login.model";
 
 const authServices = {
   login: async (username: string, password: string) => {
-    const req = await api.post<LoginResponse>(`/login`, {
+    const req = await api.post<LoginResponse>(`/auth/login`, {
       username,
-      pin: password,
+      password,
     });
-    const token = req.data;
-    return token;
+    return req.data;
+  },
+
+  register: async (username: string, password: string) => {
+    const req = await api.post<LoginResponse>(`/users`, {
+      username,
+      password,
+    });
+
+    return req.data;
   },
 };
 
