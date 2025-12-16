@@ -1,19 +1,26 @@
-// src/components/CardStack.tsx
-import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SwipeCard } from "./card";
 import GameActionBtn from "./buttons";
-import { useCardStack, type CardData } from "./utils/use-card-stack";
+import { useCardStack } from "./utils/use-card-stack";
 import { cardVariants } from "./utils/card-variants";
+import { useCharacterStack } from "@/shared/hooks/uses-character-stack";
 
-interface CardStackProps {
-  cards: CardData[];
-}
+export const CardStack = () => {
+  const { removeTopCard, isLoading } = useCharacterStack();
 
-export const CardStack: React.FC<CardStackProps> = ({
-  cards: initialCards,
-}) => {
-  const { cards, handleSwipe, getCardPosition } = useCardStack(initialCards);
+  const { handleSwipe, getCardPosition, cards } = useCardStack();
+
+  if (isLoading) {
+    return (
+      <div className="relative flex justify-center items-center w-full h-full ">
+        <div className="absolute top-2 w-100 aspect-100/150 rounded-lg shadow-lg p-4 flex flex-col items-center justify-between bg-zinc-400">
+          <p className="mt-auto text-center text-lg font-semibold text-black">
+            cargando...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex justify-center items-center w-full h-full">
@@ -43,8 +50,8 @@ export const CardStack: React.FC<CardStackProps> = ({
         })}
       </AnimatePresence>
       <div className="absolute top-60 h-screen mt-4 flex justify-between w-40">
-        <GameActionBtn direction="left" onClick={() => console.log("rigth")} />
-        <GameActionBtn direction="right" onClick={() => console.log("rigth")} />
+        <GameActionBtn direction="left" onClick={removeTopCard} />
+        <GameActionBtn direction="right" onClick={removeTopCard} />
       </div>
     </div>
   );

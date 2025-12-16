@@ -1,20 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-  type ReactNode,
-} from "react";
+import { useEffect, useState, useCallback, type ReactNode } from "react";
 
 import { useGetRandomCharacter } from "@/shared/hooks/react-query/use-get-random-character";
-import type { CharacterStackContextValue } from "./character-stack.types";
+import type { CardData } from "./character-stack.types";
 import type { CharactersResponse } from "@/shared/interfaces/characters.model";
-import type { CardData } from "@/shared/components/swiper/components/utils/use-card-stack";
-
-const CharacterStackContext = createContext<CharacterStackContextValue | null>(
-  null
-);
+import { CharacterStackContext } from "@/shared/hooks/uses-character-stack";
 
 function mapToCard(response: CharactersResponse): CardData {
   return {
@@ -68,17 +57,4 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
       {children}
     </CharacterStackContext.Provider>
   );
-}
-
-// Hook seguro
-export function useCharacterStack() {
-  const context = useContext(CharacterStackContext);
-
-  if (!context) {
-    throw new Error(
-      "useCharacterStack must be used within CharacterStackProvider"
-    );
-  }
-
-  return context;
 }

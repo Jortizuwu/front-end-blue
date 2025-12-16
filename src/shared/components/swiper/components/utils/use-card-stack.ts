@@ -1,20 +1,13 @@
-import { useState } from "react";
+import { useCharacterStack } from "@/shared/hooks/uses-character-stack";
 
 export type SwipeDirection = "left" | "right";
 
-export interface CardData {
-  id: string;
-  image: string;
-  color: string;
-  affirmation?: string;
-}
-
-export const useCardStack = (initialCards: CardData[]) => {
-  const [cards, setCards] = useState<CardData[]>(initialCards);
+export const useCardStack = () => {
+  const { cards, removeTopCard } = useCharacterStack();
 
   const handleSwipe = (direction: SwipeDirection) => {
-    console.log("Swiped:", direction);
-    setCards((prev) => prev.slice(0, -1));
+    console.log({ direction });
+    removeTopCard();
   };
 
   const getCardPosition = (index: number) => {
