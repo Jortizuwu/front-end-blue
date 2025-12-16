@@ -1,4 +1,5 @@
 import { useCharacterStack } from "@/shared/hooks/uses-character-stack";
+import { useAuthStore } from "@/store/auth";
 import { motion } from "framer-motion";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 
@@ -20,8 +21,14 @@ type Props = {
 const SwipeButton = ({ direction }: Props) => {
   const { removeTopCard } = useCharacterStack();
   const Icon: React.ElementType = actionPropsMatrix[direction!].icon;
+  const { token, setOpenDialog } = useAuthStore();
 
   const onClick = () => {
+    if (!token) {
+      setOpenDialog(true);
+      return;
+    }
+
     if (direction === "left") {
       removeTopCard("left");
       return;

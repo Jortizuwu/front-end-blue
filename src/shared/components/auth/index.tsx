@@ -11,9 +11,10 @@ import {
 
 import { useState } from "react";
 import { LogIn } from "lucide-react";
+import { useAuthStore } from "@/store/auth";
 
 export function DialogLogin() {
-  const [open, setOpen] = useState(false);
+  const { openDialog, setOpenDialog } = useAuthStore();
   const [mode, setMode] = useState<"login" | "register">("login");
 
   const handleModeChange = (newMode: "login" | "register") => {
@@ -27,7 +28,7 @@ export function DialogLogin() {
       : "Ingresa tus credenciales para iniciar sesión";
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button
           variant="ghost"
@@ -43,7 +44,7 @@ export function DialogLogin() {
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <AuthForm mode={mode} onSuccess={() => setOpen(false)} />
+        <AuthForm mode={mode} onSuccess={() => setOpenDialog(false)} />
 
         <div className="flex items-center justify-center gap-2">
           <span className="text-muted-foreground">
