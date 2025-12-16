@@ -4,7 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import PrivateRoute from "./components/route.private";
 
 const Layout = lazy(() => import("../layout"));
-const Home = lazy(() => import("../../pages/home"));
+const Characters = lazy(() => import("../../pages/characters"));
+const Reactions = lazy(() => import("../../pages/reactions"));
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,10 @@ const router = createBrowserRouter([
     children: [
       {
         // element: <PrivateRoute />,
-        children: [{ index: true, element: <Home /> }],
+        children: [
+          { index: true, element: <Characters /> },
+          { path: "reactions", element: <Reactions /> },
+        ],
       },
     ],
   },

@@ -14,16 +14,16 @@ type MenuItem = {
 
 const MENU_ITEMS: MenuItem[] = [
   {
-    id: "likes",
-    label: "Likes",
-    icon: HeartIcon,
-    to: "/",
-  },
-  {
     id: "characters",
     label: "Personajes",
     icon: BookCopy,
-    to: "/characters",
+    to: "/",
+  },
+  {
+    id: "reactions",
+    label: "Tus Reacciones",
+    icon: HeartIcon,
+    to: "/reactions",
   },
   {
     id: "explore",
