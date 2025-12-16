@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useSwipeCard } from "./utils/use-swipe-card";
 
 interface SwipeCardProps {
-  id?: number;
+  id?: string;
   image: string;
   color: string;
   affirmation?: string;

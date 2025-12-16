@@ -3,15 +3,8 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SwipeCard } from "./card";
 import GameActionBtn from "./buttons";
-import { useCardStack } from "./utils/use-card-stack";
+import { useCardStack, type CardData } from "./utils/use-card-stack";
 import { cardVariants } from "./utils/card-variants";
-
-interface CardData {
-  id: number;
-  image: string;
-  color: string;
-  affirmation?: string;
-}
 
 interface CardStackProps {
   cards: CardData[];

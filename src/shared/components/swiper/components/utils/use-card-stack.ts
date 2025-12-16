@@ -3,7 +3,7 @@ import { useState } from "react";
 export type SwipeDirection = "left" | "right";
 
 export interface CardData {
-  id: number;
+  id: string;
   image: string;
   color: string;
   affirmation?: string;
