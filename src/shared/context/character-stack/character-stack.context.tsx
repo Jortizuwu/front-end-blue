@@ -9,7 +9,7 @@ import { useCreateCharacter } from "@/shared/hooks/react-query/use-create-charac
 function mapToCard(response: CharactersResponse): CardData {
   return {
     id: response.data.id,
-    customId: `${response.data.id}-${response.data.name}`,
+    customId: `${response.data.id}-${response.data.name}-${response.data.origin}`,
     image: response.data.image,
     color: "#45ccf1",
     affirmation: response.data.name,
@@ -19,7 +19,6 @@ function mapToCard(response: CharactersResponse): CardData {
 
 export function CharacterStackProvider({ children }: { children: ReactNode }) {
   const [cards, setCards] = useState<CardData[]>([]);
-  const [lastRemovedCard, setLastRemovedCard] = useState<CardData | null>(null);
   const [initialLoad, setInitialLoad] = useState(true);
 
   const { createCharacter } = useCreateCharacter();
@@ -27,7 +26,7 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
   const { refetch, isFetching } = useGetRandomCharacter({ enabled: false });
 
   const createCharacterAndReaction = useCallback(
-    async (direction: "left" | "right") => {
+    async (direction: "left" | "right", lastRemovedCard: CardData) => {
       if (direction === "right" && lastRemovedCard) {
         {
           createCharacter({
@@ -46,7 +45,7 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
         });
       }
     },
-    [createCharacter, lastRemovedCard]
+    [createCharacter]
   );
 
   useEffect(() => {
@@ -68,34 +67,28 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
 
   const removeTopCard = useCallback(
     async (direction: "left" | "right") => {
-      let removed: CardData | null = null;
-
       setCards((prev) => {
         if (prev.length === 0) return prev;
-
-        removed = prev[prev.length - 1];
         return prev.slice(0, -1);
       });
 
-      if (removed) {
-        setLastRemovedCard(removed);
+      const topCard = cards[0];
+      if (topCard) {
+        await createCharacterAndReaction(direction, topCard);
       }
 
       const { data } = await refetch();
       if (data) {
         setCards((prev) => [mapToCard(data), ...prev]);
       }
-
-      createCharacterAndReaction(direction);
     },
-    [refetch, createCharacterAndReaction]
+    [refetch, createCharacterAndReaction, cards]
   );
 
   return (
     <CharacterStackContext.Provider
       value={{
         cards,
-        lastRemovedCard,
         isLoading: isFetching && cards.length === 0,
         removeTopCard,
       }}

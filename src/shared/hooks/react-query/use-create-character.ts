@@ -3,6 +3,7 @@ import { toast } from "sonner";
 
 import charactersServices from "@/shared/services/characters";
 import type { CreateCharacterRequest } from "@/shared/interfaces/characters.model";
+import { AxiosError } from "axios";
 
 export function useCreateCharacter() {
   const mutation = useMutation({
@@ -10,11 +11,25 @@ export function useCreateCharacter() {
       charactersServices.createCharacter(payload),
 
     onSuccess: () => {
-      toast.success("Character created successfully");
+      toast.success("Reaction created successfully", {
+        style: { background: "#6FCF97", color: "#fff" },
+      });
     },
 
-    onError: () => {
-      toast.error("Failed to create character");
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data.message || "Failed to create reaction",
+          {
+            style: { background: "#E67071", color: "#fff" },
+          }
+        );
+        return;
+      }
+
+      toast.error("Failed to create reaction", {
+        style: { background: "#E67071", color: "#fff" },
+      });
     },
   });
 

@@ -1,6 +1,5 @@
 import { useCharacterStack } from "@/shared/hooks/uses-character-stack";
 import { useAuthStore } from "@/store/auth";
-import { motion } from "framer-motion";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 
 const actionPropsMatrix = {
@@ -41,16 +40,15 @@ const SwipeButton = ({ direction }: Props) => {
   };
 
   return (
-    <motion.button onClick={onClick} whileTap={{ scale: 0.9 }}>
-      <motion.div
-        className={`flex items-center justify-center w-2 h-2 rounded-full shadow ${
-          actionPropsMatrix[direction!].bgColorClass
-        }`}
-        style={{ scale: 10 }}
-      >
-        <Icon className="w-1 h-1 text-white" />
-      </motion.div>
-    </motion.button>
+    <button
+      onClick={onClick}
+      className={`flex items-center transform transition-transform hover:scale-120 justify-center w-2 h-2 rounded-full shadow ${
+        actionPropsMatrix[direction!].bgColorClass
+      }`}
+      style={{ scale: 10 }}
+    >
+      <Icon className="w-1 h-1 text-white" />
+    </button>
   );
 };
 

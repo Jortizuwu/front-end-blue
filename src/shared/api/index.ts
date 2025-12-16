@@ -6,7 +6,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(async (confing) => {
-  const token = window.localStorage.getItem("token");
+  const token = window.sessionStorage.getItem("token");
   if (token) {
     confing.headers.Authorization = `Bearer ${token}`;
   }

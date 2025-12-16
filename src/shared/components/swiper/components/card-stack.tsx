@@ -49,7 +49,7 @@ export const CardStack = () => {
           );
         })}
       </AnimatePresence>
-      <div className="absolute top-60 h-screen mt-4 flex justify-between w-40">
+      <div className="absolute top-175 flex justify-between w-30">
         <GameActionBtn direction="left" />
         <GameActionBtn direction="right" />
       </div>

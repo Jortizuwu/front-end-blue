@@ -23,6 +23,7 @@ export function useAuthForm(mode: "login" | "register") {
         data: { accessToken },
       } = await authServices.login(username, password);
 
+      window.sessionStorage.setItem("token", accessToken);
       setToken(accessToken);
 
       toast.success("Iniciando sesión", {
