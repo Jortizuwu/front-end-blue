@@ -12,7 +12,10 @@ const getInitialValues = (mode: "login" | "register") => ({
   ...(mode === "register" && { confirmPassword: "" }),
 });
 
-export function useAuthForm(mode: "login" | "register") {
+export function useAuthForm(
+  mode: "login" | "register",
+  onSuccess?: () => void
+) {
   const { setToken } = useAuthStore();
 
   const login = useCallback(
@@ -52,6 +55,9 @@ export function useAuthForm(mode: "login" | "register") {
     isSuccess,
   } = useMutation({
     mutationFn,
+    onSuccess: () => {
+      onSuccess?.();
+    },
     onError: () => {
       toast.error(
         mode === "login" ? "Error al iniciar sesión" : "Error al registrar",

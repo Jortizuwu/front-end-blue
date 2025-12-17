@@ -14,7 +14,7 @@ import {
 
 import { useAuthForm } from "./utils/useAuthForm";
 import { AUTH_FIELDS } from "./utils/auth-form.config";
-import { useEffect } from "react";
+
 import {
   LoginSchema,
   RegisterSchema,
@@ -27,17 +27,11 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ mode = "login", onSuccess }: AuthFormProps) {
-  const { isLoading, submit, formValues, isSuccess } = useAuthForm(mode);
+  const { isLoading, submit, formValues } = useAuthForm(mode, onSuccess);
 
   const handleSubmit = (data: AuthFormType) => {
     submit(data);
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      onSuccess?.();
-    }
-  }, [isSuccess, onSuccess]);
 
   const form = useForm<AuthFormType>({
     resolver: zodResolver(mode === "login" ? LoginSchema : RegisterSchema),
