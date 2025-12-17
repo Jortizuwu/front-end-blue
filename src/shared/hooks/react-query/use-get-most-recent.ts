@@ -4,16 +4,16 @@ import { QUERY_KEYS } from "@/shared/constans/query-keys";
 import charactersServices from "@/shared/services/characters";
 import type { CharactersAllDataResponse } from "@/shared/interfaces/characters.model";
 
-interface UseGetRandomCharacterOptions {
+interface UseGetMostRecentReactionOptions {
   enabled?: boolean;
 }
 
-export function useGetMostDislikeCharacter(
-  options?: UseGetRandomCharacterOptions
+export function useGetMostRecentReactionCharacter(
+  options?: UseGetMostRecentReactionOptions
 ) {
   return useQuery<CharactersAllDataResponse>({
-    queryKey: [QUERY_KEYS.CHARACTERS, "most-dislike"],
-    queryFn: () => charactersServices.getMostDislikedCharacter(),
+    queryKey: [QUERY_KEYS.REACTIONS, "most-recent"],
+    queryFn: () => charactersServices.getMostRecentReactionCharacter(),
     enabled: options?.enabled ?? true,
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,

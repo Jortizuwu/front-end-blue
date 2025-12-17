@@ -1,3 +1,4 @@
+import { MAP_TYPES } from "@/lib/utils";
 import { Badge } from "@/shared/components/ui/badge";
 import {
   Card,
@@ -9,12 +10,6 @@ import {
 import type { Reaction } from "@/shared/interfaces/user.model";
 
 import { Heart, ThumbsDown } from "lucide-react";
-
-const MAP_TYPES = {
-  POKEMON: "Pokemon",
-  RICK_AND_MORTY: "Rick and Morty",
-  SUPER_HERO: "Super hero",
-};
 
 export function ReactionCard({ item }: { item: Reaction }) {
   const isLike = item.reaction === "LIKE";

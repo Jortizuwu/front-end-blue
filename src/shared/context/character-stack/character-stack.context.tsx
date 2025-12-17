@@ -85,7 +85,7 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
         return prev.slice(0, -1);
       });
 
-      const topCard = cards[0];
+      const topCard = cards[1];
       if (topCard) {
         await createCharacterAndReaction(direction, topCard);
       }

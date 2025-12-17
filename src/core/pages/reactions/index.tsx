@@ -19,8 +19,8 @@ function ReactionsPage() {
   }
 
   return (
-    <div className="container py-2 space-y-6">
-      <h1 className="text-2xl font-bold">Mis reacciones</h1>
+    <div className="py-2 space-y-6">
+      <h1 className="text-2xl font-bold">Mis reacciones {data?.data.length || 0}</h1>
 
       <p className="text-muted-foreground">
         Aqu&iacute; encontrar&aacute;s todas tus reacciones

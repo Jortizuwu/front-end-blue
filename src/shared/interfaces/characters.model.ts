@@ -4,6 +4,10 @@ export interface CharactersResponse extends BaseResponse<CharacterOnRandom> {
   id: string;
 }
 
+export interface CharactersAllDataResponse extends BaseResponse<Character> {
+  id: string;
+}
+
 export interface CharacterOnRandom {
   id: string;
   name: string;
@@ -24,6 +28,7 @@ export interface Character {
   type: TargetType;
   updatedAt: Date;
   extra?: Record<string, string | number>;
+  reactionType?: ReactionType;
 }
 
 export interface CreateCharacterRequest {
