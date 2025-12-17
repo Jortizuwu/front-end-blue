@@ -7,14 +7,14 @@ interface SwipeCardProps {
   id?: string;
   image: string;
   color: string;
-  affirmation?: string;
+  name?: string;
   onSwipe?: (direction: "left" | "right") => void;
 }
 
 export const SwipeCard: React.FC<SwipeCardProps> = ({
   image,
   color,
-  affirmation,
+  name,
   onSwipe,
 }) => {
   const { x, rotate, opacity, handleDragEnd } = useSwipeCard({
@@ -39,9 +39,9 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       dragElastic={0.2}
       onDragEnd={handleDragEnd}
     >
-      {affirmation && (
+      {name && (
         <p className="mt-auto text-center text-lg font-semibold text-black">
-          {affirmation}
+          {name}
         </p>
       )}
     </motion.div>

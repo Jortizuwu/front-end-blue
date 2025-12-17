@@ -42,7 +42,7 @@ export const CardStack = () => {
                 id={card.id}
                 image={card.image}
                 color={card.color}
-                affirmation={card.affirmation}
+                name={card.name}
                 onSwipe={handleSwipe}
               />
             </motion.div>

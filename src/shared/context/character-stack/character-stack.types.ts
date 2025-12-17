@@ -10,6 +10,6 @@ export interface CardData {
   image: string;
   customId: string;
   color: string;
-  affirmation?: string;
+  name?: string;
   type: TargetType;
 }

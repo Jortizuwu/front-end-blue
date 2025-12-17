@@ -15,6 +15,8 @@ export interface CreateCharacterRequest {
   idExternalApi: string;
   type: TargetType;
   reactionType: ReactionType;
+  name: string;
+  image: string;
 }
 
 export type ReactionType = "LIKE" | "UNLIKE";

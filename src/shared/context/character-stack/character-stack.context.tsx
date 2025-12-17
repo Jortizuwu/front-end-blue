@@ -12,7 +12,7 @@ function mapToCard(response: CharactersResponse): CardData {
     customId: `${response.data.id}-${response.data.name}-${response.data.origin}`,
     image: response.data.image,
     color: "#45ccf1",
-    affirmation: response.data.name,
+    name: response.data.name,
     type: response.data.origin,
   };
 }
@@ -33,6 +33,8 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
             idExternalApi: lastRemovedCard.id,
             type: lastRemovedCard.type,
             reactionType: "LIKE",
+            name: lastRemovedCard.name || "",
+            image: lastRemovedCard.image,
           });
         }
       }
@@ -42,6 +44,8 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
           idExternalApi: lastRemovedCard.id,
           type: lastRemovedCard.type,
           reactionType: "UNLIKE",
+          name: lastRemovedCard.name || "",
+          image: lastRemovedCard.image,
         });
       }
     },
