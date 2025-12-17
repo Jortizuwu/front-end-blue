@@ -12,3 +12,15 @@ api.interceptors.request.use(async (confing) => {
   }
   return confing;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      window.sessionStorage.clear();
+      window.location.reload();
+    }
+
+    return Promise.reject(error);
+  }
+);
