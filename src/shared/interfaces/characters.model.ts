@@ -3,12 +3,19 @@ import type { BaseResponse } from "./response";
 export interface CharactersResponse extends BaseResponse<Character> {
   id: string;
 }
+
 export interface Character {
-  id: string;
+  _id: string;
+  custom_id: string;
+  createdAt: Date;
+  dislikesCount: number;
   name: string;
   image: string;
-  origin: TargetType;
-  extra: Record<string, string | number>;
+  idExternalApi: string;
+  likesCount: number;
+  type: TargetType;
+  updatedAt: Date;
+  extra?: Record<string, string | number>;
 }
 
 export interface CreateCharacterRequest {
