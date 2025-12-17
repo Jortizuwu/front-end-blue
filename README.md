@@ -1,73 +1,116 @@
-# React + TypeScript + Vite
+# Frontend Technical Test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Getting Started
 
-Currently, two official plugins are available:
+These instructions will help you run the project locally for development and testing purposes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+For deployment instructions, please refer to the **Deployment** section.
 
-## React Compiler
+---
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 📋 Prerequisites
 
-## Expanding the ESLint configuration
+To run this project, you need one of the following installed:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Node.js** (recommended)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ⚙️ Installation & Running the Project
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Local setup (Node.js >= 18)
+
+Install dependencies:
+
+```bash
+yarn install
+# or
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔐 Environment Variables
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+This project uses environment variables to configure external services.
+
+Create a `.env` file in the root of the project and add the following variable:
+
+```env
+VITE_API_URL=value-env
 ```
+
+> ⚠️ **Important**: Since this project uses **Vite**, all environment variables must be prefixed with `VITE_` to be accessible in the frontend.
+
+You can access this variable in the code using:
+
+```ts
+import.meta.env.VITE_API_URL;
+```
+
+---
+
+Start the development server:
+
+```bash
+yarn dev
+# or
+npm run dev
+```
+
+---
+
+## 🦴 Folder Structure
+
+```
+.
+├── src                         # Application source code
+│   ├── assets                  # Icons, images, fonts
+│   ├── core                    # router and pages
+│   ├── lib                     # utils funtions
+│   ├── store                   # Global state configuration
+│   ├── shared                  # Reusable components, hooks and business logic
+│   └── test-utils              # Testing utilities and configuration
+├── public                      # Public assets and utilities
+└── README.md
+```
+
+---
+
+## ⌨️ Code Style & Guidelines
+
+Please follow the coding standards defined in:
+
+- **[shadcn](https://ui.shadcn.com/)**
+  A set of beautifully designed components that you can customize, extend, and build on. Start here then make it your own. Open Source. Open Code.
+
+---
+
+## 🛠️ Built With
+
+- **[React](https://nodejs.org/es)**
+  Node.js® is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts.
+
+- **[vite](https://vite.dev/)**
+  Vite is a blazing fast frontend build tool powering the next generation of web applications.
+  
+- **[React](https://reactjs.org/docs/getting-started.html)**
+  JavaScript library for building user interfaces
+
+- **[shadcn](https://ui.shadcn.com/)**
+  A set of beautifully designed components that you can customize, extend, and build on. Start here then make it your own. Open Source. Open Code.
+
+- **[Yarn](https://yarnpkg.com/)**
+  Default package manager
+
+- **[React Query](https://react-query.tanstack.com/overview)**
+  Data fetching and caching library for React
+
+- **[zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)**
+  State management library
+
+---
+
+## ✒️ Author
+
+- **Jose Ortiz**
