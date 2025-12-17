@@ -58,6 +58,14 @@ yarn dev
 npm run dev
 ```
 
+The page will be available at:
+
+```
+http://localhost:5173/
+```
+
+---
+
 ---
 
 ## 🦴 Folder Structure
@@ -93,7 +101,6 @@ Please follow the coding standards defined in:
 
 - **[vite](https://vite.dev/)**
   Vite is a blazing fast frontend build tool powering the next generation of web applications.
-  
 - **[React](https://reactjs.org/docs/getting-started.html)**
   JavaScript library for building user interfaces
 
