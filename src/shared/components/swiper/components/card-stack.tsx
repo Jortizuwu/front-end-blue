@@ -50,8 +50,8 @@ export const CardStack = () => {
         })}
       </AnimatePresence>
       <div className="absolute top-175 flex justify-between w-30">
-        <GameActionBtn direction="left" />
         <GameActionBtn direction="right" />
+        <GameActionBtn direction="left" />
       </div>
     </div>
   );

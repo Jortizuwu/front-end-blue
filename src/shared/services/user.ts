@@ -2,9 +2,9 @@ import { api } from "../api";
 import type { ListUserReactions } from "../interfaces/user.model";
 
 const userServices = {
-  listReactions: async (type: "LIKE" | "UNLIKE" = "LIKE") => {
+  listReactions: async () => {
     const response = await api.get<ListUserReactions>(
-      `/users/reaction/${type}/characters`
+      `/users/reaction/characters`
     );
     return response.data;
   },

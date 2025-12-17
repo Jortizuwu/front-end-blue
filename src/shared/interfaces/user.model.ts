@@ -21,6 +21,8 @@ export interface Character {
   custom_id: string;
   createdAt: Date;
   dislikesCount: number;
+  name: string;
+  image: string;
   idExternalApi: string;
   likesCount: number;
   type: TargetType;
