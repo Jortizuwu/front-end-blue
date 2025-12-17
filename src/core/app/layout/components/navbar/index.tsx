@@ -45,6 +45,7 @@ function NavbarComponent() {
 
   const handleLogout = () => {
     removeToken();
+    window.sessionStorage.removeItem("token");
     window.location.reload();
   };
 

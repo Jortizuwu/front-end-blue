@@ -1,7 +1,15 @@
 import type { BaseResponse } from "./response";
 
-export interface CharactersResponse extends BaseResponse<Character> {
+export interface CharactersResponse extends BaseResponse<CharacterOnRandom> {
   id: string;
+}
+
+export interface CharacterOnRandom {
+  id: string;
+  name: string;
+  image: string;
+  origin: TargetType;
+  extra?: Record<string, string | number>;
 }
 
 export interface Character {

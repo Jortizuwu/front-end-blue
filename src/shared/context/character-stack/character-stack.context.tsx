@@ -1,4 +1,10 @@
-import { useEffect, useState, useCallback, type ReactNode } from "react";
+import {
+  useEffect,
+  useState,
+  useCallback,
+  type ReactNode,
+  useRef,
+} from "react";
 
 import { useGetRandomCharacter } from "@/shared/hooks/react-query/use-get-random-character";
 import type { CardData } from "./character-stack.types";
@@ -20,6 +26,7 @@ function mapToCard(response: CharactersResponse): CardData {
 export function CharacterStackProvider({ children }: { children: ReactNode }) {
   const [cards, setCards] = useState<CardData[]>([]);
   const [initialLoad, setInitialLoad] = useState(true);
+  const isFetchingCardRef = useRef(false);
 
   const { createCharacter } = useCreateCharacter();
 
@@ -71,8 +78,10 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
 
   const removeTopCard = useCallback(
     async (direction: "left" | "right") => {
+      if (isFetchingCardRef.current) return;
+      isFetchingCardRef.current = true;
+
       setCards((prev) => {
-        if (prev.length === 0) return prev;
         return prev.slice(0, -1);
       });
 
@@ -85,6 +94,8 @@ export function CharacterStackProvider({ children }: { children: ReactNode }) {
       if (data) {
         setCards((prev) => [mapToCard(data), ...prev]);
       }
+
+      isFetchingCardRef.current = false;
     },
     [refetch, createCharacterAndReaction, cards]
   );
