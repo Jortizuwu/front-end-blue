@@ -12,18 +12,18 @@ interface Props {
 
 function CardExplore({ character }: Props) {
   return (
-    <Card className="overflow-hidden mt-4">
+    <Card className="mt-4">
       <CardHeader className="pb-2 text-center">
         <CardTitle className="text-2xl capitalize">{character.name}</CardTitle>
         <span className="text-sm text-muted-foreground">{character.type}</span>
       </CardHeader>
 
       <CardContent className="space-y-6">
-        <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-muted">
+        <div className="relative w-auto rounded-lg bg-muted">
           <img
             src={character.image}
             alt={character.name}
-            className="w-full h-full object-contain p-4"
+            className="w-full max-h-120 object-contain p-4"
           />
         </div>
 
