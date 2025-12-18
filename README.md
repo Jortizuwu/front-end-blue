@@ -1,48 +1,95 @@
-# Frontend Technical Test
+# Prueba Técnica de Frontend
 
-## 🚀 Getting Started
+## 🚀 Cómo usar la aplicación
 
-These instructions will help you run the project locally for development and testing purposes.
+### 1. Configuración previa
 
-For deployment instructions, please refer to the **Deployment** section.
+Antes de iniciar el frontend, asegúrate de tener el **backend en funcionamiento**.
 
----
-
-## 📋 Prerequisites
-
-To run this project, you need one of the following installed:
-
-- **Node.js** (recommended)
+* Clona y configura el backend siguiendo las instrucciones de su repositorio:
+  👉 [URL del backend]
+* Sigue los pasos indicados tanto en el `README` de este repositorio como en el del backend.
 
 ---
 
-## ⚙️ Installation & Running the Project
+### 3. Uso de la aplicación
 
-### Local setup (Node.js >= 18)
+Al iniciar la aplicación verás una **tarjeta de personaje**.
 
-Install dependencies:
+* Desliza la tarjeta hacia:
+
+  * **Izquierda** → Dislike
+  * **Derecha** → Like
+
+> ⚠️ **Importante:**
+> Debes **iniciar sesión** para poder reaccionar a los personajes.
+
+---
+
+### 4. Navegación y funcionalidades
+
+Desde la **barra de navegación** puedes explorar las siguientes opciones:
+
+* 📋 Ver los personajes a los que ya has reaccionado
+* 🔍 Buscar personajes existentes en la base de datos
+* 👍 Ver el personaje con más *Likes*
+* 👎 Ver el personaje con más *Dislikes*
+
+---
+
+## ✅ Resumen
+
+* Backend activo obligatorio
+* Interfaz basada en gestos (swipe)
+* Autenticación requerida para reaccionar
+* Múltiples vistas accesibles desde la navegación
+
+---
+
+## 🚀 Primeros pasos
+
+Estas instrucciones te ayudarán a ejecutar el proyecto localmente para desarrollo y pruebas.
+
+---
+
+## 📋 Prerrequisitos
+
+Para ejecutar este proyecto necesitas tener instalado uno de los siguientes:
+
+* **[Node.js](https://nodejs.org/es/download)** ( >= 18)
+* **[npm](https://nodejs.org/es/download)** (viene por defecto con node)
+* **[yarn](https://yarnpkg.com/getting-started/install)** (opcional)
+* **[visual studio](https://code.visualstudio.com/)** (opcional)
+---
+
+## ⚙️ Instalación y ejecución del proyecto
+
+### Configuración local (Node.js >= 18)
+
+Instala las dependencias:
 
 ```bash
 yarn install
-# or
+# o
 npm install
 ```
 
 ---
 
-## 🔐 Environment Variables
+## 🔐 Variables de entorno
 
-This project uses environment variables to configure external services.
+Este proyecto utiliza variables de entorno para configurar servicios externos.
 
-Create a `.env` file in the root of the project and add the following variable:
+Crea un archivo `.env` en la raíz del proyecto y agrega la siguiente variable:
 
 ```env
-VITE_API_URL=value-env
+VITE_API_URL="http://localhost:3000/api"
 ```
 
-> ⚠️ **Important**: Since this project uses **Vite**, all environment variables must be prefixed with `VITE_` to be accessible in the frontend.
+> ⚠️ **Importante:**
+> Como este proyecto utiliza **Vite**, todas las variables de entorno deben comenzar con el prefijo `VITE_` para que sean accesibles desde el frontend.
 
-You can access this variable in the code using:
+Puedes acceder a esta variable en el código usando:
 
 ```ts
 import.meta.env.VITE_API_URL;
@@ -50,15 +97,15 @@ import.meta.env.VITE_API_URL;
 
 ---
 
-Start the development server:
+Inicia el servidor de desarrollo:
 
 ```bash
 yarn dev
-# or
+# o
 npm run dev
 ```
 
-The page will be available at:
+La aplicación estará disponible en:
 
 ```
 http://localhost:5173/
@@ -66,58 +113,57 @@ http://localhost:5173/
 
 ---
 
----
-
-## 🦴 Folder Structure
+## 🦴 Estructura de carpetas
 
 ```
 .
-├── src                         # Application source code
-│   ├── assets                  # Icons, images, fonts
-│   ├── core                    # router and pages
-│   ├── lib                     # utils funtions
-│   ├── store                   # Global state configuration
-│   ├── shared                  # Reusable components, hooks and business logic
-│   └── test-utils              # Testing utilities and configuration
-├── public                      # Public assets and utilities
+├── src                         # Código fuente de la aplicación
+│   ├── assets                  # Iconos, imágenes y fuentes
+│   ├── core                    # Rutas y páginas
+│   ├── lib                     # Funciones utilitarias
+│   ├── store                   # Configuración del estado global
+│   ├── shared                  # Componentes reutilizables, hooks y lógica de negocio
+│   └── test-utils              # Utilidades y configuración de pruebas
+├── public                      # Recursos públicos
 └── README.md
 ```
 
 ---
 
-## ⌨️ Code Style & Guidelines
+## ⌨️ Estilo de código y guías
 
-Please follow the coding standards defined in:
+Por favor, sigue los estándares de codificación definidos en:
 
-- **[shadcn](https://ui.shadcn.com/)**
-  A set of beautifully designed components that you can customize, extend, and build on. Start here then make it your own. Open Source. Open Code.
-
----
-
-## 🛠️ Built With
-
-- **[React](https://nodejs.org/es)**
-  Node.js® is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts.
-
-- **[vite](https://vite.dev/)**
-  Vite is a blazing fast frontend build tool powering the next generation of web applications.
-- **[React](https://reactjs.org/docs/getting-started.html)**
-  JavaScript library for building user interfaces
-
-- **[shadcn](https://ui.shadcn.com/)**
-  A set of beautifully designed components that you can customize, extend, and build on. Start here then make it your own. Open Source. Open Code.
-
-- **[Yarn](https://yarnpkg.com/)**
-  Default package manager
-
-- **[React Query](https://react-query.tanstack.com/overview)**
-  Data fetching and caching library for React
-
-- **[zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)**
-  State management library
+* **[shadcn/ui](https://ui.shadcn.com/)**
+  Un conjunto de componentes bellamente diseñados que puedes personalizar, extender y adaptar a tus necesidades. Código abierto.
 
 ---
 
-## ✒️ Author
+## 🛠️ Construido con
 
-- **Jose Ortiz**
+* **[Node.js](https://nodejs.org/es)**
+  Entorno de ejecución JavaScript gratuito, open source y multiplataforma.
+
+* **[Vite](https://vite.dev/)**
+  Herramienta de construcción para frontend extremadamente rápida.
+
+* **[React](https://reactjs.org/docs/getting-started.html)**
+  Librería de JavaScript para construir interfaces de usuario.
+
+* **[shadcn/ui](https://ui.shadcn.com/)**
+  Componentes reutilizables y altamente personalizables.
+
+* **[Yarn](https://yarnpkg.com/)**
+  Gestor de paquetes por defecto.
+
+* **[React Query](https://react-query.tanstack.com/overview)**
+  Librería para obtención y cacheo de datos en React.
+
+* **[Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)**
+  Librería para manejo de estado global.
+
+---
+
+## ✒️ Autor
+
+* **Jose Ortiz**
