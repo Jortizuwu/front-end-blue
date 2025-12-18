@@ -40,9 +40,13 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       onDragEnd={handleDragEnd}
     >
       {name && (
-        <p className="mt-auto text-center text-lg font-semibold text-black">
-          {name}
-        </p>
+        <div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur rounded-full px-6 py-2 shadow-md"
+        >
+          <p className="text-base font-semibold text-black">
+            {name}
+          </p>
+        </div>
       )}
     </motion.div>
   );

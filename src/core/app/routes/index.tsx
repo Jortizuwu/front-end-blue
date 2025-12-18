@@ -1,7 +1,7 @@
-// src/routes/routes.tsx
+import { useIsMobile } from "@/shared/hooks/use-is-mobile";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import PrivateRoute from "./components/route.private";
+import { Toaster } from "sonner";
 
 const Layout = lazy(() => import("../layout"));
 const Characters = lazy(() => import("../../pages/characters"));
@@ -14,7 +14,6 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        // element: <PrivateRoute />,
         children: [
           { index: true, element: <Characters /> },
           { path: "reactions", element: <Reactions /> },
@@ -27,9 +26,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const isMobile = useIsMobile();
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={router} />
+      <Toaster position={isMobile ? "top-center" : "bottom-right"} richColors />
     </Suspense>
   );
 };

@@ -35,11 +35,13 @@ const MENU_ITEMS: MenuItem[] = [
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    "flex flex-col gap-1 items-center justify-center p-2 transition-colors",
+    "flex flex-col items-center justify-center gap-1 transition-colors",
+    "px-3 py-2",
     isActive
       ? "text-primary font-semibold"
       : "text-muted-foreground hover:text-foreground"
   );
+
 function NavbarComponent() {
   const { token, removeToken } = useAuthStore();
 
@@ -50,34 +52,59 @@ function NavbarComponent() {
   };
 
   return (
-    <nav className="border-b mx-auto flex justify-between items-center px-8 h-20">
-      <div className="flex-1" />
+    <>
+      <nav className="hidden md:flex w-full border-b mx-auto items-center justify-between px-8 h-20">
+        <div className="flex-1" />
 
-      <div className="flex gap-8 items-center">
-        {MENU_ITEMS.map(({ id, label, icon: Icon, to }) => (
-          <NavLink key={id} to={to} className={navLinkClass}>
-            <Icon className="h-5 w-5" />
-            <span className="text-xs">{label}</span>
-          </NavLink>
-        ))}
+        <div className="flex gap-8 items-center">
+          {MENU_ITEMS.map(({ id, label, icon: Icon, to }) => (
+            <NavLink key={id} to={to} className={navLinkClass}>
+              <Icon className="h-5 w-5" />
+              <span className="text-xs">{label}</span>
+            </NavLink>
+          ))}
 
-        {token ? (
-          <Button
-            variant="ghost"
-            size="lg"
-            aria-label="Cerrar sesión"
-            className="flex flex-col gap-1 items-center justify-center p-2"
-            onClick={handleLogout}
-          >
-            <LogOut className="h-5 w-5" />
-            Cerrar sesión
-          </Button>
-        ) : (
-          <DialogLogin />
-        )}
-      </div>
-      <div className="flex-1" />
-    </nav>
+          {token ? (
+            <Button
+              variant="ghost"
+              size="lg"
+              className="flex flex-col items-center gap-1"
+              onClick={handleLogout}
+            >
+              <LogOut className="h-5 w-5" />
+              <span className="text-xs">Salir</span>
+            </Button>
+          ) : (
+            <DialogLogin />
+          )}
+        </div>
+
+        <div className="flex-1" />
+      </nav>
+
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t bg-background">
+        <div className="flex justify-around items-center h-16">
+          {MENU_ITEMS.map(({ id, icon: Icon, to }) => (
+            <NavLink key={id} to={to} className={navLinkClass}>
+              <Icon className="h-6 w-6" />
+            </NavLink>
+          ))}
+
+          {token ? (
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Cerrar sesión"
+              onClick={handleLogout}
+            >
+              <LogOut className="h-6 w-6" />
+            </Button>
+          ) : (
+            <DialogLogin />
+          )}
+        </div>
+      </nav>
+    </>
   );
 }
 
