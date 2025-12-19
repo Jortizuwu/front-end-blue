@@ -7,7 +7,7 @@
 Antes de iniciar el frontend, asegúrate de tener el **backend en funcionamiento**.
 
 * Clona y configura el backend siguiendo las instrucciones de su repositorio:
-  👉 [URL del backend]
+  👉 **[backend](https://github.com/Jortizuwu/bank-end-blue)**
 * Sigue los pasos indicados tanto en el `README` de este repositorio como en el del backend.
 
 ---
