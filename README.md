@@ -37,15 +37,6 @@ Desde la **barra de navegación** puedes explorar las siguientes opciones:
 
 ---
 
-## ✅ Resumen
-
-* Backend activo obligatorio
-* Interfaz basada en gestos (swipe)
-* Autenticación requerida para reaccionar
-* Múltiples vistas accesibles desde la navegación
-
----
-
 ## 🚀 Primeros pasos
 
 Estas instrucciones te ayudarán a ejecutar el proyecto localmente para desarrollo y pruebas.
